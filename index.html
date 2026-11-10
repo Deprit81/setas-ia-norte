@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SETAS IA NORTE</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f5ef;
+  color: #23412e;
+  margin: 0;
+  padding: 20px;
+}
+main {
+  max-width: 500px;
+  margin: 35px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px #00000012;
+}
+h1 { color: #23633d; }
+button {
+  background: #23633d;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 15px;
+}
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+#resultado {
+  margin-top: 20px;
+  text-align: left;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>🍄 SETAS IA NORTE</h1>
+<p>Predictor micológico del norte de España</p>
+<p>Bizkaia · Álava · Burgos</p>
+
+<h3>Planificar salida</h3>
+
+<label for="zona">Zona de recolección</label>
+<select id="zona">
+<option>Arcentales</option>
+<option>Gorbea</option>
+<option>Villanañe - Álava</option>
+<option>Villasana de Mena</option>
+<option>Bercedo</option>
+<option>Puerto de los Tornos</option>
+</select>
+
+<label for="fecha">Fecha de salida</label>
+<input type="date" id="fecha">
+
+<label for="especie">Especie</label>
+<select id="especie">
+<option>Boletus edulis</option>
+<option>Boletus aereus</option>
+<option>Boletus pinophilus</option>
+<option>Craterellus cornucopioides</option>
+<option>Craterellus tubaeformis</option>
+<option>Craterellus lutescens</option>
+</select>
+
+<button onclick="analizar()">Analizar zona</button>
+
+<div id="resultado"></div>
+</main>
+
+<script>
+document.getElementById("fecha").value =
+  new Date().toLocaleDateString("en-CA");
+
+function analizar() {
+  const zona = document.getElementById("zona").value;
+  const fecha = document.getElementById("fecha").value;
+  const especie = document.getElementById("especie").value;
+
+  if (!fecha) {
+    alert("Selecciona una fecha");
+    return;
+  }
+
+  document.getElementById("resultado").innerHTML =
+    "<h3>Resultado</h3>" +
+    "<p><b>Zona:</b> " + zona + "</p>" +
+    "<p><b>Fecha:</b> " + fecha + "</p>" +
+    "<p><b>Especie:</b> " + especie + "</p>" +
+    "<p>Esta es una versión inicial de prueba.</p>" +
+    "<p>La predicción meteorológica y micológica " +
+    "todavía no está conectada.</p>" +
+    "<p>No se muestran probabilidades inventadas.</p>";
+}
+</script>
+</body>
+</html>
