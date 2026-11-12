@@ -1,0 +1,26 @@
+{
+  "id": "./v32.html",
+  "name": "SETAS IA NORTE",
+  "short_name": "SETAS NORTE",
+  "description": "Meteorología, zonas y diario de recolección de setas",
+  "lang": "es",
+  "start_url": "./v32.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef3ed",
+  "theme_color": "#174b34",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
