@@ -1,11 +1,8 @@
 
- // SETAS IA NORTE V3.9
- // Actualización de caché y compatibilidad con la aplicación instalada.
-
-const CACHE = 'setas-norte-v39-1';
+const CACHE = 'setas-norte-v46-1';
 
 const FILES = [
-  './v39.html',
+  './v46.html',
   './manifest.webmanifest',
   './icon-180.png',
   './icon-192.png',
@@ -40,10 +37,10 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Compatibilidad con accesos antiguos de la V3.2.
-  if (url.pathname.endsWith('/v32.html')) {
+  // Redirigir accesos antiguos a la versión actual.
+  if (/\/v(?:32|39)\.html$/.test(url.pathname)) {
     event.respondWith(
-      fetch('./v39.html').catch(() => caches.match('./v39.html'))
+      fetch('./v46.html').catch(() => caches.match('./v46.html'))
     );
     return;
   }
@@ -62,4 +59,3 @@ self.addEventListener('fetch', event => {
       .catch(() => caches.match(req))
   );
 });
-
