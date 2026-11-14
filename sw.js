@@ -1,8 +1,8 @@
 
-const CACHE = 'setas-norte-v46-1';
+const CACHE = 'setas-norte-v53-1';
 
 const FILES = [
-  './v46.html',
+  './v53.html',
   './manifest.webmanifest',
   './icon-180.png',
   './icon-192.png',
@@ -22,7 +22,9 @@ self.addEventListener('activate', event => {
     caches.keys()
       .then(keys => Promise.all(
         keys
-          .filter(key => key.startsWith('setas-norte-') && key !== CACHE)
+          .filter(key =>
+            key.startsWith('setas-norte-') && key !== CACHE
+          )
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())
@@ -33,14 +35,16 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   const url = new URL(req.url);
 
-  if (req.method !== 'GET' || url.origin !== self.location.origin) {
+  if (req.method !== 'GET' ||
+      url.origin !== self.location.origin) {
     return;
   }
 
-  // Redirigir accesos antiguos a la versión actual.
-  if (/\/v(?:32|39)\.html$/.test(url.pathname)) {
+  // Accesos de versiones anteriores.
+  if (/\/v(?:32|39|46)\.html$/.test(url.pathname)) {
     event.respondWith(
-      fetch('./v46.html').catch(() => caches.match('./v46.html'))
+      fetch('./v53.html')
+        .catch(() => caches.match('./v53.html'))
     );
     return;
   }
