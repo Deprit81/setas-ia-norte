@@ -1,6 +1,6 @@
 
-const CACHE = 'setas-norte-v57-1';
-const ACTUAL = './v57.html';
+const CACHE = 'setas-norte-v63-1';
+const ACTUAL = './v63.html';
 
 const FILES = [
   ACTUAL,
@@ -39,9 +39,8 @@ self.addEventListener('fetch', event => {
     url.origin !== self.location.origin
   ) return;
 
-  // Mantener operativos los accesos antiguos
-  // de la aplicación instalada.
-  if (/\/v(?:32|39|46|53)\.html$/.test(url.pathname)) {
+  // Redirigir los accesos antiguos de la aplicación.
+  if (/\/v(?:32|39|46|53|57)\.html$/.test(url.pathname)) {
     event.respondWith(
       fetch(ACTUAL, { cache: 'no-store' })
         .then(response => {
