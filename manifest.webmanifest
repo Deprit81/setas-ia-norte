@@ -4,7 +4,7 @@
   "short_name": "SETAS NORTE",
   "description": "Meteorología, zonas y diario de recolección de setas",
   "lang": "es",
-  "start_url": "./v53.html",
+  "start_url": "./v57.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#eef3ed",
