@@ -1,12 +1,10 @@
 
-const CACHE = 'setas-norte-v53-1';
+const CACHE = 'setas-norte-v57-1';
+const ACTUAL = './v57.html';
 
 const FILES = [
-  './v53.html',
-  './manifest.webmanifest',
-  './icon-180.png',
-  './icon-192.png',
-  './icon-512.png'
+  ACTUAL,
+  './manifest.webmanifest'
 ];
 
 self.addEventListener('install', event => {
@@ -23,7 +21,8 @@ self.addEventListener('activate', event => {
       .then(keys => Promise.all(
         keys
           .filter(key =>
-            key.startsWith('setas-norte-') && key !== CACHE
+            key.startsWith('setas-norte-') &&
+            key !== CACHE
           )
           .map(key => caches.delete(key))
       ))
@@ -35,16 +34,23 @@ self.addEventListener('fetch', event => {
   const req = event.request;
   const url = new URL(req.url);
 
-  if (req.method !== 'GET' ||
-      url.origin !== self.location.origin) {
-    return;
-  }
+  if (
+    req.method !== 'GET' ||
+    url.origin !== self.location.origin
+  ) return;
 
-  // Accesos de versiones anteriores.
-  if (/\/v(?:32|39|46)\.html$/.test(url.pathname)) {
+  // Mantener operativos los accesos antiguos
+  // de la aplicación instalada.
+  if (/\/v(?:32|39|46|53)\.html$/.test(url.pathname)) {
     event.respondWith(
-      fetch('./v53.html')
-        .catch(() => caches.match('./v53.html'))
+      fetch(ACTUAL, { cache: 'no-store' })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No disponible');
+          }
+          return response;
+        })
+        .catch(() => caches.match(ACTUAL))
     );
     return;
   }
